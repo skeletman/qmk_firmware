@@ -240,7 +240,38 @@ enum unicode_names {
   questioneq,
 
   //CALC
+  integral,
+  iint,
+  iiint,
+  iiiint,
+  intcirc,
+  iintcirc,
+  iiintcirc,
+  intcircdot,
+  clockwiseint,
+  anticlockwiseint,
+  clockwisecontourint,
+  anticlockwisecontourint,
+  upperint,
+  lowerint,
+  barint,
+  barbarint,
+  intersectint,
+  unionint,
+  slashint,
+  cint,
 
+  partiald, //U+2202
+  increment, //U+2206
+  nabla, //U+2207
+  langlebracket, //U+2329
+  ranglebracket, //U+232A
+  prime, //U+2032
+  doubleprime, //U+2033
+  tripleprime, //U+2034
+  dagger, //U+2020
+  doubledagger, //U+2021
+  
   //SET
   in,
   ni,
@@ -458,6 +489,39 @@ const uint32_t PROGMEM unicode_map[] = {
   [stareq] = 0x225B,
   [deltaeq] = 0x225C,
   [questioneq] = 0x225F,
+
+  //CALC
+  [integral] = 0x222B,
+  [iint] = 0x222C,
+  [iiint] = 0x222D,
+  [iiiint] = 0x2A0C,
+  [intcirc] = 0x222E,
+  [iintcirc] = 0x222F,
+  [iiintcirc] = 0x2230,
+  [intcircdot] = 0x2A15,
+  [clockwiseint] = 0x2231,
+  [anticlockwiseint] = 0x2A11,
+  [clockwisecontourint] = 0x2232,
+  [anticlockwisecontourint] = 0x2233,
+  [upperint] = 0x2A1B,
+  [lowerint] = 0x2A1C,
+  [barint] = 0x2A0D,
+  [barbarint] = 0x2A0E,
+  [intersectint] = 0x2A19,
+  [unionint] = 0x2A1A,
+  [slashint] = 0x2A0F,
+  [cint] = 0x2A10,
+
+  [partiald] = 0x2202,
+  [increment] = 0x2206,
+  [nabla] = 0x2207,
+  [langlebracket] = 0x2329,
+  [ranglebracket] = 0x232A,
+  [prime] = 0x2032,
+  [doubleprime] = 0x2033,
+  [tripleprime] = 0x2034,
+  [dagger] = 0x2020,
+  [doubledagger] = 0x2021,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -551,11 +615,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        | QWER |      |      |      |      | QWER |           | QWER |      |      |      |      |      |        |
+ * |        | QWER |      |      | REL  |      | QWER |           | QWER |      |      |      |      |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |        | ARR  |      |      |      | GRK  |------|           |------|      |      |      |      |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |      |      |      | BBB  |      |           |      |      |      |      |      |      |        |
+ * |        |      |      | CALC |      | BBB  |      |           |      |      |      |      |      |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |      |      |      |      |      |                                       |      |      |      |      |      |
  *   `----------------------------------'                                       `----------------------------------'
@@ -572,7 +636,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        UC_M_WC,   KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,
        UC_M_WI, TO(BASE), KC_NO, KC_NO, TO(REL), KC_NO,   TO(BASE),
        UC_M_LN, TO(ARR),  KC_NO, KC_NO, KC_NO, TO(GRK),
-       KC_NO,   KC_NO,    KC_NO, KC_NO, KC_NO, TO(BBB),   KC_NO,
+       KC_NO,   KC_NO,    KC_NO, TO(CALC), KC_NO, TO(BBB),   KC_NO,
        KC_NO,   KC_NO,    KC_NO, KC_NO, KC_NO,
                                            KC_NO, KC_NO,
                                                   KC_NO,
@@ -591,7 +655,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        UC_M_WC,   KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,
        UC_M_WI, TO(BASE), KC_NO, KC_NO, OSL(REL), KC_NO,   TO(BASE),
        UC_M_LN, OSL(ARR), KC_NO, KC_NO, KC_NO, OSL(GRK),
-       KC_NO,   KC_NO,    KC_NO, KC_NO, KC_NO, OSL(BBB),   KC_NO,
+       KC_NO,   KC_NO,    KC_NO, OSL(CALC), KC_NO, OSL(BBB),   KC_NO,
        KC_NO,   KC_NO,    KC_NO, KC_NO, KC_NO,
                                            KC_NO, KC_NO,
                                                   KC_NO,
@@ -876,18 +940,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [CALC] = LAYOUT_ergodox( 
         // left hand
         KC_TRNS,         KC_TRNS,       KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,  KC_TRNS,
-        KC_TRNS,         KC_NO,         KC_NO,   KC_NO,    KC_NO,    KC_NO,     KC_TRNS,
-        KC_TRNS,         KC_NO,         KC_NO,   KC_NO,      KC_NO,    KC_NO,
-        KC_TRNS,         KC_NO,         KC_NO,   KC_NO,      KC_NO,    KC_NO,     KC_TRNS,
+        KC_TRNS,         X(prime),         X(doubleprime),   X(tripleprime),    KC_NO,    KC_NO,     KC_TRNS,
+        KC_TRNS,         X(increment),   X(nabla),      X(partiald),   KC_NO,    KC_NO,
+        KC_TRNS,         X(langlebracket),         X(ranglebracket),   X(dagger),      X(doubledagger),    KC_NO,     KC_TRNS,
         KC_TRNS,         KC_TRNS,       KC_TRNS, KC_TRNS,    KC_TRNS,
                                                KC_TRNS,        KC_TRNS,
                                                               KC_TRNS,
                                                KC_TRNS,KC_TRNS,KC_TRNS,
         // right hand
-             KC_TRNS,     KC_TRNS,    KC_TRNS,  KC_TRNS,    KC_TRNS,    KC_TRNS,        KC_TRNS,
-             KC_TRNS,     KC_NO,      KC_NO,    KC_NO,      KC_NO,       KC_NO,          KC_TRNS,
-                          KC_NO,      KC_NO,    KC_NO,      KC_NO,      KC_NO,          KC_TRNS,
-             KC_TRNS,     KC_NO,      KC_NO,    KC_NO,      KC_NO,      KC_NO,          KC_TRNS,
+             KC_TRNS,     X(cint),    X(clockwiseint),  X(anticlockwiseint),    X(clockwisecontourint),    X(anticlockwisecontourint),        KC_TRNS,
+             KC_TRNS,     X(slashint),      X(intcirc),    X(iintcirc),      X(iiintcirc),       X(intcircdot),          KC_TRNS,
+                          X(barbarint),      X(integral),    X(iint),      X(iiint),      X(iiiint),          KC_TRNS,
+             KC_TRNS,     X(barint),      X(upperint),    X(lowerint),      X(intersectint),      X(unionint),          KC_TRNS,
                                   KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,          KC_TRNS,
              KC_TRNS,        KC_TRNS,
              KC_TRNS,
