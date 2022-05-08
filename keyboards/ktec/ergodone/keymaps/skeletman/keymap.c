@@ -6,9 +6,14 @@ enum layer_names {
   SYMB,
   LAYR,
   LAYRONESHOT,
+  EMPTY,
   GRK,
   ARR,
-  BBB
+  BBB,
+  LOGIC,
+  REL,
+  CALC,
+  SET
 };
 
 enum custom_keycodes {
@@ -189,7 +194,62 @@ enum unicode_names {
   uprightharpoon,
   downrightharpoon,
   
+  //LOGIC
+  ltack,
+  rtack,
+  utack,
+  dtack,
 
+  //REL
+  llt,
+  ggt,
+  lllt,
+  gggt,
+  ltdot,
+  gtdot,
+  leq,
+  geq,
+  normalsubgroup,
+  containsnormalsubgroup,
+  normalsubgroupeq,
+  containsnormalsubgroupeq,
+  prec,
+  succ,
+  preceq,
+  succeq,
+  
+  propto,
+  oeq,
+  andeq,
+  oreq,
+  tildetildeeq,
+  tilde,
+  tildeq,
+  tildeqq,
+  approx,
+  tripletilde,
+  //eq,
+  tripleeq,
+  quadeq,
+  coloneq,
+  eqcolon,
+  defeq,
+  doteq,
+  stareq,
+  deltaeq,
+  questioneq,
+
+  //CALC
+
+  //SET
+  in,
+  ni,
+  nin,
+  nni,
+  subset,
+  supset,
+  subseteq,
+  supseteq,
 };
 
 const uint32_t PROGMEM unicode_map[] = {
@@ -360,6 +420,44 @@ const uint32_t PROGMEM unicode_map[] = {
   [rightupharpoon] = 0x21C0,    // ⇀ 
   [uprightharpoon] = 0x21BE,    // ↾
   [downrightharpoon] = 0x21C2,  // ⇂
+
+  //REL
+  [llt] = 0x226A,
+  [ggt] = 0x226B,
+  [lllt] = 0x22D8,
+  [gggt] = 0x22D9,
+  [ltdot] = 0x22D6,
+  [gtdot] = 0x22D7,
+  [leq] = 0x2264,
+  [geq] = 0x2265,
+  [normalsubgroup] = 0x22B2,
+  [containsnormalsubgroup] = 0x22B3,
+  [normalsubgroupeq] = 0x22B4,
+  [containsnormalsubgroupeq] = 0x22B5,
+  [prec] = 0x227A,
+  [succ] = 0x227B,
+  [preceq] = 0x227C,
+  [succeq] = 0x227D,
+  
+  [propto] = 0x221D,
+  [oeq] = 0x2257,
+  [andeq] = 0x2259,
+  [oreq] = 0x225A,
+  [tildetildeeq] = 0x224A,
+  [tilde] = 0x223C,
+  [tildeq] = 0x2243,
+  [tildeqq] = 0x2245,
+  [approx] = 0x2248,
+  [tripletilde] = 0x224B,
+  [tripleeq] = 0x2261,
+  [quadeq] = 0x2263,
+  [coloneq] = 0x2254,
+  [eqcolon] = 0x2255,
+  [defeq] = 0x225D,
+  [doteq] = 0x2250,
+  [stareq] = 0x225B,
+  [deltaeq] = 0x225C,
+  [questioneq] = 0x225F,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -472,7 +570,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // LAYER SWITCH
 [LAYR] = LAYOUT_ergodox(
        UC_M_WC,   KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,
-       UC_M_WI, TO(BASE), KC_NO, KC_NO, KC_NO, KC_NO,   TO(BASE),
+       UC_M_WI, TO(BASE), KC_NO, KC_NO, TO(REL), KC_NO,   TO(BASE),
        UC_M_LN, TO(ARR),  KC_NO, KC_NO, KC_NO, TO(GRK),
        KC_NO,   KC_NO,    KC_NO, KC_NO, KC_NO, TO(BBB),   KC_NO,
        KC_NO,   KC_NO,    KC_NO, KC_NO, KC_NO,
@@ -491,7 +589,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 [LAYRONESHOT] = LAYOUT_ergodox(
        UC_M_WC,   KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,
-       UC_M_WI, TO(BASE), KC_NO, KC_NO, KC_NO, KC_NO,   TO(BASE),
+       UC_M_WI, TO(BASE), KC_NO, KC_NO, OSL(REL), KC_NO,   TO(BASE),
        UC_M_LN, OSL(ARR), KC_NO, KC_NO, KC_NO, OSL(GRK),
        KC_NO,   KC_NO,    KC_NO, KC_NO, KC_NO, OSL(BBB),   KC_NO,
        KC_NO,   KC_NO,    KC_NO, KC_NO, KC_NO,
@@ -508,10 +606,51 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_NO,
        KC_NO, KC_NO, KC_NO
 ),
+/* Keymap: Empty
+ *
+ * ,--------------------------------------------------.           ,--------------------------------------------------.
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |------|           |------|      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   |      |      |      |      |      |                                       |      |      |      |      |      |
+ *   `----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        |      |      |       |      |      |
+ *                                 ,------|------|------|       |------+------+------.
+ *                                 |      |      |      |       |      |      |      |
+ *                                 |      |      |------|       |------|      |      |
+ *                                 |      |      |      |       |      |      |      |
+ *                                 `--------------------'       `--------------------'
+ */
+[EMPTY] = LAYOUT_ergodox( 
+        // left hand
+        KC_TRNS,         KC_TRNS,       KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,  KC_TRNS,
+        KC_TRNS,         KC_NO,         KC_NO,   KC_NO,    KC_NO,    KC_NO,     KC_TRNS,
+        KC_TRNS,         KC_NO,         KC_NO,   KC_NO,      KC_NO,    KC_NO,
+        KC_TRNS,         KC_NO,         KC_NO,   KC_NO,      KC_NO,    KC_NO,     KC_TRNS,
+        KC_TRNS,         KC_TRNS,       KC_TRNS, KC_TRNS,    KC_TRNS,
+                                               KC_TRNS,        KC_TRNS,
+                                                              KC_TRNS,
+                                               KC_TRNS,KC_TRNS,KC_TRNS,
+        // right hand
+             KC_TRNS,     KC_TRNS,    KC_TRNS,  KC_TRNS,    KC_TRNS,    KC_TRNS,        KC_TRNS,
+             KC_TRNS,     KC_NO,      KC_NO,    KC_NO,      KC_NO,       KC_NO,          KC_TRNS,
+                          KC_NO,      KC_NO,    KC_NO,      KC_NO,      KC_NO,          KC_TRNS,
+             KC_TRNS,     KC_NO,      KC_NO,    KC_NO,      KC_NO,      KC_NO,          KC_TRNS,
+                                  KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,          KC_TRNS,
+             KC_TRNS,        KC_TRNS,
+             KC_TRNS,
+             KC_TRNS,KC_TRNS, KC_TRNS
+    ),
 /* Keymap 3: Greek
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |        |   ⅰ  |   ⅱ  |   ⅲ  |   ⅳ  |   ⅴ  |      |           |      |   ⅵ  |  ⅶ  |  ⅷ |  ⅸ   |   0  |        |
+ * |        |   ⅰ  |   ⅱ  |   ⅲ  |   ⅳ  |   ⅴ  |      |           |      |   ⅵ  |  ⅶ  |  ⅷ |  ⅸ   |      |        |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * |        |   θ  |   ω  |   ε  |   ρ  |   τ  |      |           |      |   ψ  |   υ  |   ι  |   ο  |   π  |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -540,7 +679,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                               KC_TRNS,
                                                KC_TRNS,KC_TRNS,KC_TRNS,
         // right hand
-             KC_TRNS,     XP(rsix, Rsix),   XP(rseven, Rseven),  XP(reight, Reight),   XP(rnine, Rnine),   KC_0,             KC_TRNS,
+             KC_TRNS,     XP(rsix, Rsix),   XP(rseven, Rseven),  XP(reight, Reight),   XP(rnine, Rnine),   XP(rten, Rten),             KC_TRNS,
              KC_TRNS,    XP(gy,Gy),   XP(gu,Gu),  XP(gi,Gi),   XP(go,Go),   XP(gp,Gp),             KC_TRNS,
                           XP(gh,Gh),   XP(gj,Gj),  XP(gk,Gk),   XP(gl,Gl),   KC_TRNS,          KC_TRNS,
              KC_TRNS,     XP(gn,Gn),   XP(gm,Gm),  KC_TRNS,KC_TRNS, KC_TRNS,          KC_TRNS,
@@ -626,6 +765,170 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_TRNS,    XP(by,bY),   XP(bu,bU),  XP(bi,bI),   XP(bo,bO),   XP(bp,bP),             KC_TRNS,
                           XP(bh,bH),   XP(bj,bJ),  XP(bk,bK),   XP(bl,bL),   KC_TRNS,          KC_TRNS,
              KC_TRNS,     XP(bn,bN),   XP(bm,bM),  KC_TRNS,KC_TRNS, KC_TRNS,          KC_TRNS,
+                                  KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,          KC_TRNS,
+             KC_TRNS,        KC_TRNS,
+             KC_TRNS,
+             KC_TRNS,KC_TRNS, KC_TRNS
+    ),
+/* Keymap: Logic
+ *
+ * ,--------------------------------------------------.           ,--------------------------------------------------.
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |------|           |------|      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   |      |      |      |      |      |                                       |      |      |      |      |      |
+ *   `----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        |      |      |       |      |      |
+ *                                 ,------|------|------|       |------+------+------.
+ *                                 |      |      |      |       |      |      |      |
+ *                                 |      |      |------|       |------|      |      |
+ *                                 |      |      |      |       |      |      |      |
+ *                                 `--------------------'       `--------------------'
+ */
+[LOGIC] = LAYOUT_ergodox( 
+        // left hand
+        KC_TRNS,         KC_TRNS,       KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,  KC_TRNS,
+        KC_TRNS,         KC_NO,         KC_NO,   KC_NO,    KC_NO,    KC_NO,     KC_TRNS,
+        KC_TRNS,         KC_NO,         KC_NO,   KC_NO,      KC_NO,    KC_NO,
+        KC_TRNS,         KC_NO,         KC_NO,   KC_NO,      KC_NO,    KC_NO,     KC_TRNS,
+        KC_TRNS,         KC_TRNS,       KC_TRNS, KC_TRNS,    KC_TRNS,
+                                               KC_TRNS,        KC_TRNS,
+                                                              KC_TRNS,
+                                               KC_TRNS,KC_TRNS,KC_TRNS,
+        // right hand
+             KC_TRNS,     KC_TRNS,    KC_TRNS,  KC_TRNS,    KC_TRNS,    KC_TRNS,        KC_TRNS,
+             KC_TRNS,     KC_NO,      KC_NO,    KC_NO,      KC_NO,       KC_NO,          KC_TRNS,
+                          KC_NO,      KC_NO,    KC_NO,      KC_NO,      KC_NO,          KC_TRNS,
+             KC_TRNS,     KC_NO,      KC_NO,    KC_NO,      KC_NO,      KC_NO,          KC_TRNS,
+                                  KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,          KC_TRNS,
+             KC_TRNS,        KC_TRNS,
+             KC_TRNS,
+             KC_TRNS,KC_TRNS, KC_TRNS
+    ),
+/* Keymap: Relations
+ *
+ * ,--------------------------------------------------.           ,--------------------------------------------------.
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |------|           |------|      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   |      |      |      |      |      |                                       |      |      |      |      |      |
+ *   `----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        |      |      |       |      |      |
+ *                                 ,------|------|------|       |------+------+------.
+ *                                 |      |      |      |       |      |      |      |
+ *                                 |      |      |------|       |------|      |      |
+ *                                 |      |      |      |       |      |      |      |
+ *                                 `--------------------'       `--------------------'
+ */
+[REL] = LAYOUT_ergodox( 
+        // left hand
+        KC_TRNS,         X(propto),       X(oeq), X(andeq),  X(oreq), X(tildetildeeq),  KC_TRNS,
+        KC_TRNS,         X(tilde),         X(tildeq),   X(tildeqq),    X(approx),    X(tripletilde),     KC_TRNS,
+        KC_TRNS,         KC_EQL,         X(tripleeq),   X(quadeq),      X(coloneq),    X(eqcolon),
+        KC_TRNS,         X(defeq),         X(doteq),   X(stareq),      X(deltaeq),    X(questioneq),     KC_TRNS,
+        KC_TRNS,         KC_TRNS,       KC_TRNS, KC_TRNS,    KC_TRNS,
+                                               KC_TRNS,        KC_TRNS,
+                                                              KC_TRNS,
+                                               KC_TRNS,KC_TRNS,KC_TRNS,
+        // right hand
+             KC_TRNS,     KC_NO,    X(llt),    X(ggt),  X(lllt),    X(gggt),         KC_TRNS,
+             KC_TRNS,     KC_NO,      X(normalsubgroup),    X(containsnormalsubgroup),      X(normalsubgroupeq),       X(containsnormalsubgroupeq),          KC_TRNS,
+                          KC_NO,      X(ltdot),    X(gtdot),      X(leq),      X(geq),          KC_TRNS,
+             KC_TRNS,     KC_NO,      X(prec),    X(succ),      X(preceq),      X(succeq),          KC_TRNS,
+                                  KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,          KC_TRNS,
+             KC_TRNS,        KC_TRNS,
+             KC_TRNS,
+             KC_TRNS,KC_TRNS, KC_TRNS
+    ),
+/* Keymap: Calculus
+ *
+ * ,--------------------------------------------------.           ,--------------------------------------------------.
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |------|           |------|      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   |      |      |      |      |      |                                       |      |      |      |      |      |
+ *   `----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        |      |      |       |      |      |
+ *                                 ,------|------|------|       |------+------+------.
+ *                                 |      |      |      |       |      |      |      |
+ *                                 |      |      |------|       |------|      |      |
+ *                                 |      |      |      |       |      |      |      |
+ *                                 `--------------------'       `--------------------'
+ */
+[CALC] = LAYOUT_ergodox( 
+        // left hand
+        KC_TRNS,         KC_TRNS,       KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,  KC_TRNS,
+        KC_TRNS,         KC_NO,         KC_NO,   KC_NO,    KC_NO,    KC_NO,     KC_TRNS,
+        KC_TRNS,         KC_NO,         KC_NO,   KC_NO,      KC_NO,    KC_NO,
+        KC_TRNS,         KC_NO,         KC_NO,   KC_NO,      KC_NO,    KC_NO,     KC_TRNS,
+        KC_TRNS,         KC_TRNS,       KC_TRNS, KC_TRNS,    KC_TRNS,
+                                               KC_TRNS,        KC_TRNS,
+                                                              KC_TRNS,
+                                               KC_TRNS,KC_TRNS,KC_TRNS,
+        // right hand
+             KC_TRNS,     KC_TRNS,    KC_TRNS,  KC_TRNS,    KC_TRNS,    KC_TRNS,        KC_TRNS,
+             KC_TRNS,     KC_NO,      KC_NO,    KC_NO,      KC_NO,       KC_NO,          KC_TRNS,
+                          KC_NO,      KC_NO,    KC_NO,      KC_NO,      KC_NO,          KC_TRNS,
+             KC_TRNS,     KC_NO,      KC_NO,    KC_NO,      KC_NO,      KC_NO,          KC_TRNS,
+                                  KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,          KC_TRNS,
+             KC_TRNS,        KC_TRNS,
+             KC_TRNS,
+             KC_TRNS,KC_TRNS, KC_TRNS
+    ),
+/* Keymap: Set
+ *
+ * ,--------------------------------------------------.           ,--------------------------------------------------.
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |------|           |------|      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   |      |      |      |      |      |                                       |      |      |      |      |      |
+ *   `----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        |      |      |       |      |      |
+ *                                 ,------|------|------|       |------+------+------.
+ *                                 |      |      |      |       |      |      |      |
+ *                                 |      |      |------|       |------|      |      |
+ *                                 |      |      |      |       |      |      |      |
+ *                                 `--------------------'       `--------------------'
+ */
+[SET] = LAYOUT_ergodox( 
+        // left hand
+        KC_TRNS,         KC_TRNS,       KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,  KC_TRNS,
+        KC_TRNS,         KC_NO,         KC_NO,   KC_NO,    KC_NO,    KC_NO,     KC_TRNS,
+        KC_TRNS,         KC_NO,         KC_NO,   KC_NO,      KC_NO,    KC_NO,
+        KC_TRNS,         KC_NO,         KC_NO,   KC_NO,      KC_NO,    KC_NO,     KC_TRNS,
+        KC_TRNS,         KC_TRNS,       KC_TRNS, KC_TRNS,    KC_TRNS,
+                                               KC_TRNS,        KC_TRNS,
+                                                              KC_TRNS,
+                                               KC_TRNS,KC_TRNS,KC_TRNS,
+        // right hand
+             KC_TRNS,     KC_TRNS,    KC_TRNS,  KC_TRNS,    KC_TRNS,    KC_TRNS,        KC_TRNS,
+             KC_TRNS,     KC_NO,      KC_NO,    KC_NO,      KC_NO,       KC_NO,          KC_TRNS,
+                          KC_NO,      KC_NO,    KC_NO,      KC_NO,      KC_NO,          KC_TRNS,
+             KC_TRNS,     KC_NO,      KC_NO,    KC_NO,      KC_NO,      KC_NO,          KC_TRNS,
                                   KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,          KC_TRNS,
              KC_TRNS,        KC_TRNS,
              KC_TRNS,
