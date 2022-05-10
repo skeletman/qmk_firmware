@@ -10,10 +10,12 @@ enum layer_names {
   GRK,
   ARR,
   BBB,
+  FRAK,
   LOGIC,
   REL,
   CALC,
-  SET
+  SET,
+  OP
 };
 
 enum custom_keycodes {
@@ -21,7 +23,7 @@ enum custom_keycodes {
   EPRM,
   VRSN,
   RGB_SLD,
-  TRIPLE_ZERO
+  TRIPLE_ZERO,
 }; 
 
 enum unicode_names {
@@ -281,6 +283,79 @@ enum unicode_names {
   supset,
   subseteq,
   supseteq,
+
+  //OP
+  plusminus, //U+00B1
+  minusplus, //U+2213
+  plus, //U+002B
+  minus, //U+2212
+  times, //U+00D7
+  divide, //U+00F7
+  oplus, //U+2295
+  ominus, //U+2296
+  otimes, //U+2297
+  odivide, //U+2298
+  sqplus, //U+229E
+  sqminus, //U+229F
+  sqtimes, //U+22A0
+  sqdot, //U+22A1
+  dotplus, //U+2214
+  dotminus, //U+2238
+
+  asterisk, //U+2217
+  ringop, //U+2218
+  bulletop, //U+2219
+  cdot, //U+00B7
+  oasterisk, //U+229B
+  oring, //U+229A
+  odot, //U+2299
+  diamondop, //U+22C4
+  star, //U+22C6
+  nsum, //U+2211
+  nprod, //U+220F
+  ncoprod, //U+2210
+  coprod, //U+2A3F
+  wreath, //U+2240
+  notdivide, //U+2224
+  infty, //U+221E
+
+  nodot, //U+2A00
+  noplus, //U+2A01
+  notimes, //U+2A02
+  ntimes, //U+2A09
+  udot, //U+228D
+  uplus, //U+228E
+  nudot, //U+2A03
+  nuplus, //U+2A04
+
+  //FRAK
+  frakq,
+  frakw,
+  frake,
+  frakr,
+  frakt,
+  fraky,
+  fraku,
+  fraki,
+  frako,
+  frakp,
+  fraka,
+  fraks,
+  frakd,
+  frakf,
+  frakg,
+  frakh,
+  frakj,
+  frakk,
+  frakl,
+  frakz,
+  frakx,
+  frakc,
+  frakv,
+  frakb,
+  frakn,
+  frakm,
+
 };
 
 const uint32_t PROGMEM unicode_map[] = {
@@ -522,6 +597,82 @@ const uint32_t PROGMEM unicode_map[] = {
   [tripleprime] = 0x2034,
   [dagger] = 0x2020,
   [doubledagger] = 0x2021,
+
+  //OP
+  [plusminus] = 0x00B1,
+  [minusplus] = 0x2213,
+  [plus] = 0x002B,
+  [minus] = 0x2212,
+  [times] = 0x00D7,
+  [divide] = 0x00F7,
+  [oplus] = 0x2295,
+  [ominus] = 0x2296,
+  [otimes] = 0x2297,
+  [odivide] = 0x2298,
+  [sqplus] = 0x229E,
+  [sqminus] = 0x229F,
+  [sqtimes] = 0x22A0,
+  [sqdot] = 0x22A1,
+  [dotplus] = 0x2214,
+  [dotminus] = 0x2238,
+
+  [asterisk] = 0x2217,
+  [ringop] = 0x2218,
+  [bulletop] = 0x2219,
+  [cdot] = 0x00B7,
+  [oasterisk] = 0x229B,
+  [oring] = 0x229A,
+  [odot] = 0x2299,
+  [diamondop] = 0x22C4,
+  [star] = 0x22C6,
+  [nsum] = 0x2211,
+  [nprod] = 0x220F,
+  [ncoprod] = 0x2210,
+  [coprod] = 0x2A3F,
+  [wreath] = 0x2240,
+  [notdivide] = 0x2224,
+  [infty] = 0x221E,
+
+  [odot] = 0x2A00,
+  [noplus] = 0x2A01,
+  [notimes] = 0x2A02,
+  [ntimes] = 0x2A09,
+  [udot] = 0x228D,
+  [uplus] = 0x228E,
+  [nudot] = 0x2A03,
+  [nuplus] = 0x2A04,
+
+  //FRAK
+  [frakq] = 0x1D514,
+  [frakw] = 0x1D51A,
+  [frake] = 0x1D508,
+  [frakr] = 0x211C,
+  [frakt] = 0x1D517,
+  [fraky] = 0x1D51C,
+  [fraku] = 0x1D518,
+  [fraki] = 0x2111,
+  [frako] = 0x1D512,
+  [frakp] = 0x1D513,
+  [fraka] = 0x1D504,
+  [fraks] = 0x1D516,
+  [frakd] = 0x1D507,
+  [frakf] = 0x1D509,
+  [frakg] = 0x1D50A,
+  [frakh] = 0x210C,
+  [frakj] = 0x1D50D,
+  [frakk] = 0x1D50E,
+  [frakl] = 0x1D50F,
+  [frakz] = 0x2128,
+  [frakx] = 0x1D51B,
+  [frakc] = 0x212D,
+  [frakv] = 0x1D519,
+  [frakb] = 0x1D505,
+  [frakn] = 0x1D511,
+  [frakm] = 0x1D510,
+};
+
+const uint32_t PROGMEM unicode_map_pair[] = {
+
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -613,11 +764,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 2: Layer switch
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |        |  OP  |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        | QWER |      |      | REL  |      | QWER |           | QWER |      |      |      |      |      |        |
+ * |        | QWER |      |      | REL  |      | QWER |           | QWER |      |      |      |  OP  |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        | ARR  |      |      |      | GRK  |------|           |------|      |      |      |      |      |        |
+ * |        | ARR  |      |      | FRAK | GRK  |------|           |------|      |      |      |      |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |        |      |      | CALC |      | BBB  |      |           |      |      |      |      |      |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
@@ -633,39 +784,39 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 // LAYER SWITCH
 [LAYR] = LAYOUT_ergodox(
-       UC_M_WC,   KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,
+       UC_M_WC, TO(OP),   KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,
        UC_M_WI, TO(BASE), KC_NO, KC_NO, TO(REL), KC_NO,   TO(BASE),
-       UC_M_LN, TO(ARR),  KC_NO, KC_NO, KC_NO, TO(GRK),
+       UC_M_LN, TO(ARR),  KC_NO, KC_NO, TO(FRAK), TO(GRK),
        KC_NO,   KC_NO,    KC_NO, TO(CALC), KC_NO, TO(BBB),   KC_NO,
        KC_NO,   KC_NO,    KC_NO, KC_NO, KC_NO,
                                            KC_NO, KC_NO,
                                                   KC_NO,
                                     KC_NO, KC_NO, KC_NO,
     // right hand
-       KC_NO,     KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-       TO(BASE),  KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-                  KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-       KC_NO,     KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-                          KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+       KC_NO,     KC_NO,  KC_NO, KC_NO, KC_NO,  KC_NO, KC_NO,
+       TO(BASE),  KC_NO,  KC_NO, KC_NO, TO(OP), KC_NO, KC_NO,
+                  KC_NO,  KC_NO, KC_NO, KC_NO,  KC_NO, KC_NO,
+       KC_NO,     KC_NO,  KC_NO, KC_NO, KC_NO,  KC_NO, KC_NO,
+                          KC_NO, KC_NO, KC_NO,  KC_NO, KC_NO,
        KC_NO, KC_NO,
        KC_NO,
        KC_NO, KC_NO, KC_NO
 ),
 [LAYRONESHOT] = LAYOUT_ergodox(
-       UC_M_WC,   KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,
+       UC_M_WC, OSL(OP),  KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,
        UC_M_WI, TO(BASE), KC_NO, KC_NO, OSL(REL), KC_NO,   TO(BASE),
-       UC_M_LN, OSL(ARR), KC_NO, KC_NO, KC_NO, OSL(GRK),
+       UC_M_LN, OSL(ARR), KC_NO, KC_NO, OSL(FRAK), OSL(GRK),
        KC_NO,   KC_NO,    KC_NO, OSL(CALC), KC_NO, OSL(BBB),   KC_NO,
        KC_NO,   KC_NO,    KC_NO, KC_NO, KC_NO,
                                            KC_NO, KC_NO,
                                                   KC_NO,
                                     KC_NO, KC_NO, KC_NO,
     // right hand
-       KC_NO,     KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-       TO(BASE),  KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-                  KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-       KC_NO,     KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-                          KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+       KC_NO,     KC_NO,  KC_NO, KC_NO, KC_NO,    KC_NO, KC_NO,
+       TO(BASE),  KC_NO,  KC_NO, KC_NO, OSL(OP),  KC_NO, KC_NO,
+                  KC_NO,  KC_NO, KC_NO, KC_NO,    KC_NO, KC_NO,
+       KC_NO,     KC_NO,  KC_NO, KC_NO, KC_NO,    KC_NO, KC_NO,
+                          KC_NO, KC_NO, KC_NO,    KC_NO, KC_NO,
        KC_NO, KC_NO,
        KC_NO,
        KC_NO, KC_NO, KC_NO
@@ -693,11 +844,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [EMPTY] = LAYOUT_ergodox( 
         // left hand
-        KC_TRNS,         KC_TRNS,       KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,  KC_TRNS,
-        KC_TRNS,         KC_NO,         KC_NO,   KC_NO,    KC_NO,    KC_NO,     KC_TRNS,
-        KC_TRNS,         KC_NO,         KC_NO,   KC_NO,      KC_NO,    KC_NO,
-        KC_TRNS,         KC_NO,         KC_NO,   KC_NO,      KC_NO,    KC_NO,     KC_TRNS,
-        KC_TRNS,         KC_TRNS,       KC_TRNS, KC_TRNS,    KC_TRNS,
+        KC_TRNS,         KC_TRNS,       KC_TRNS,  KC_TRNS,     KC_TRNS,  KC_TRNS,    KC_TRNS,
+        KC_TRNS,         KC_NO,         KC_NO,    KC_NO,       KC_NO,    KC_NO,      KC_TRNS,
+        KC_TRNS,         KC_NO,         KC_NO,    KC_NO,       KC_NO,    KC_NO,
+        KC_TRNS,         KC_NO,         KC_NO,    KC_NO,       KC_NO,    KC_NO,      KC_TRNS,
+        KC_TRNS,         KC_TRNS,       KC_TRNS,  KC_TRNS,     KC_TRNS,
                                                KC_TRNS,        KC_TRNS,
                                                               KC_TRNS,
                                                KC_TRNS,KC_TRNS,KC_TRNS,
@@ -829,6 +980,47 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_TRNS,    XP(by,bY),   XP(bu,bU),  XP(bi,bI),   XP(bo,bO),   XP(bp,bP),             KC_TRNS,
                           XP(bh,bH),   XP(bj,bJ),  XP(bk,bK),   XP(bl,bL),   KC_TRNS,          KC_TRNS,
              KC_TRNS,     XP(bn,bN),   XP(bm,bM),  KC_TRNS,KC_TRNS, KC_TRNS,          KC_TRNS,
+                                  KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,          KC_TRNS,
+             KC_TRNS,        KC_TRNS,
+             KC_TRNS,
+             KC_TRNS,KC_TRNS, KC_TRNS
+    ),
+/* Keymap: Frak
+ *
+ * ,--------------------------------------------------.           ,--------------------------------------------------.
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |------|           |------|      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   |      |      |      |      |      |                                       |      |      |      |      |      |
+ *   `----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        |      |      |       |      |      |
+ *                                 ,------|------|------|       |------+------+------.
+ *                                 |      |      |      |       |      |      |      |
+ *                                 |      |      |------|       |------|      |      |
+ *                                 |      |      |      |       |      |      |      |
+ *                                 `--------------------'       `--------------------'
+ */
+[FRAK] = LAYOUT_ergodox( 
+        // left hand
+        KC_TRNS,         KC_TRNS,       KC_TRNS,  KC_TRNS,     KC_TRNS,  KC_TRNS,    KC_TRNS,
+        KC_TRNS,         X(frakq),         X(frakw),    X(frake),       X(frakr),    X(frakt),      KC_TRNS,
+        KC_TRNS,         X(fraka),         X(fraks),    X(frakd),       X(frakf),    X(frakg),
+        KC_TRNS,         X(frakz),         X(frakx),    X(frakc),       X(frakv),    X(frakb),      KC_TRNS,
+        KC_TRNS,         KC_TRNS,       KC_TRNS,  KC_TRNS,     KC_TRNS,
+                                               KC_TRNS,        KC_TRNS,
+                                                              KC_TRNS,
+                                               KC_TRNS,KC_TRNS,KC_TRNS,
+        // right hand
+             KC_TRNS,     KC_TRNS,    KC_TRNS,  KC_TRNS,    KC_TRNS,    KC_TRNS,        KC_TRNS,
+             KC_TRNS,     X(fraky),      X(fraku),    X(fraki),      X(frako),       X(frakp),          KC_TRNS,
+                          X(frakh),      X(frakj),    X(frakk),      X(frakl),      KC_TRNS,          KC_TRNS,
+             KC_TRNS,     X(frakn),      X(frakm),    KC_TRNS,      KC_TRNS,      KC_TRNS,          KC_TRNS,
                                   KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,          KC_TRNS,
              KC_TRNS,        KC_TRNS,
              KC_TRNS,
@@ -994,6 +1186,47 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                           KC_NO,      KC_NO,    KC_NO,      KC_NO,      KC_NO,          KC_TRNS,
              KC_TRNS,     KC_NO,      KC_NO,    KC_NO,      KC_NO,      KC_NO,          KC_TRNS,
                                   KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,          KC_TRNS,
+             KC_TRNS,        KC_TRNS,
+             KC_TRNS,
+             KC_TRNS,KC_TRNS, KC_TRNS
+    ),
+/* Keymap: Operators
+ *
+ * ,--------------------------------------------------.           ,--------------------------------------------------.
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |------|           |------|      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   |      |      |      |      |      |                                       |      |      |      |      |      |
+ *   `----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        |      |      |       |      |      |
+ *                                 ,------|------|------|       |------+------+------.
+ *                                 |      |      |      |       |      |      |      |
+ *                                 |      |      |------|       |------|      |      |
+ *                                 |      |      |      |       |      |      |      |
+ *                                 `--------------------'       `--------------------'
+ */
+[OP] = LAYOUT_ergodox( 
+        // left hand
+        KC_TRNS,         X(nuplus),     X(nudot),       KC_NO,        X(nodot),   X(minusplus),     KC_TRNS,
+        KC_TRNS,         X(uplus),      X(udot),        X(oring),     X(odot),    X(plusminus),     KC_TRNS,
+        KC_TRNS,         X(diamondop),  X(star),        X(ringop),    X(cdot),    X(bulletop),
+        KC_TRNS,         X(asterisk),   X(oasterisk),   X(wreath),    X(sqdot),   KC_NO,            KC_TRNS,
+        KC_TRNS,         KC_TRNS,       KC_TRNS,        KC_TRNS,      KC_TRNS, 
+                                               KC_TRNS,        KC_TRNS,
+                                                              KC_TRNS,
+                                               KC_TRNS,KC_TRNS,KC_TRNS,
+        // right hand
+             KC_TRNS,     KC_NO,        X(noplus),    KC_NO,          X(notimes),     KC_NO,        KC_TRNS,
+             KC_TRNS,     KC_NO,        X(oplus),     X(ominus),      X(otimes),      X(odivide),   KC_TRNS,
+                          X(coprod),    X(plus),      X(minus),       X(times),       X(divide),    KC_TRNS,
+             KC_TRNS,     X(ncoprod),   X(nsum),      KC_NO,          X(nprod),       X(ntimes),    KC_TRNS,
+                                        KC_TRNS,      KC_TRNS,        KC_TRNS,        KC_TRNS,      KC_TRNS,
              KC_TRNS,        KC_TRNS,
              KC_TRNS,
              KC_TRNS,KC_TRNS, KC_TRNS
