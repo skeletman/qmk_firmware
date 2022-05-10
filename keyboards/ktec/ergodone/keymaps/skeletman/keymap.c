@@ -23,7 +23,7 @@ enum custom_keycodes {
   EPRM,
   VRSN,
   RGB_SLD,
-  TRIPLE_ZERO,
+  TRIPLE_ZERO
 }; 
 
 enum unicode_names {
@@ -669,10 +669,6 @@ const uint32_t PROGMEM unicode_map[] = {
   [frakb] = 0x1D505,
   [frakn] = 0x1D511,
   [frakm] = 0x1D510,
-};
-
-const uint32_t PROGMEM unicode_map_pair[] = {
-
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
