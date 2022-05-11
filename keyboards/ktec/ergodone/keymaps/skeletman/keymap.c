@@ -1,5 +1,8 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
+#undef XP
+#define XP(i,j) (QK_UNICODEMAP_PAIR | ((i)&0x7FFF))
+
 
 enum layer_names {
   BASE,
@@ -29,135 +32,192 @@ enum custom_keycodes {
 enum unicode_names {
   //GRK
 	rone,  // 1:: ⅰ
-	rtwo,
-	rthree,
-	rfour,  // 4:: ⅳ
-	rfive,  // 5:: ⅴ
-	rsix,  // 6:: ⅵ
-	rseven,  // 7:: ⅶ
-	reight,  // 8:: ⅷ
-	rnine,  // 9:: ⅸ
-	rten,  // 0:: ⅹ
-	gq,  // q:: θ
-	gw,  // w:: ω
-	ge,  // e:: ε
-	gr,  // r:: ρ
-	gt,  // t:: τ
-	gy,  // y:: ψ
-	gu,  // u:: υ
-	gi,  // i:: ι
-	go,  // o:: ο
-	gp,  // p:: π
-	ga,  // a:: α
-	gs,  // s:: σ
-	gd,  // d:: δ
-	gf,  // f:: φ
-	gg,  // g:: γ
-	gh,  // h:: η
-	gj,  // j:: ϑ
-	gk,  // k:: κ
-	gl,  // l:: λ
-	gz,  // z:: ζ
-	gx,  // x:: ξ
-	gc,  // c:: χ
-	gv,  // v:: ς
-	gb,  // b:: β
-	gn,  // n:: ν
-	gm,  // m:: μ
-
-  //GRKU
 	Rone,  // 1:: Ⅰ
+
+	rtwo,
 	Rtwo,  // 2:: Ⅱ
+
+	rthree,
 	Rthree,  // 3:: Ⅲ
+
+	rfour,  // 4:: ⅳ
 	Rfour,  // 4:: Ⅳ
+
+	rfive,  // 5:: ⅴ
 	Rfive,  // 5:: Ⅴ
+
+	rsix,  // 6:: ⅵ
 	Rsix,  // 6:: Ⅵ
+
+	rseven,  // 7:: ⅶ
 	Rseven,  // 7:: Ⅶ
+
+	reight,  // 8:: ⅷ
 	Reight,  // 8:: Ⅷ
+
+	rnine,  // 9:: ⅸ
 	Rnine,  // 9:: Ⅸ
+
+	rten,  // 0:: ⅹ
   Rten,
+
+	gq,  // q:: θ
 	Gq,  // Q:: Θ
+
+	gw,  // w:: ω
 	Gw,  // W:: Ω
+
+	ge,  // e:: ε
 	Ge,  // E:: Ε
+
+	gr,  // r:: ρ
 	Gr,  // R:: Ρ
+
+	gt,  // t:: τ
 	Gt,  // T:: Τ
+
+	gy,  // y:: ψ
 	Gy,  // Y:: Ψ
+
+	gu,  // u:: υ 
 	Gu,  // U:: Υ
+
+	gi,  // i:: ι
 	Gi,  // I:: Ι
+
+	go,  // o:: ο
 	Go,  // O:: Ο
+
+	gp,  // p:: π
 	Gp,  // P:: Π
+
+	ga,  // a:: α
 	Ga,  // A:: Α
+
+	gs,  // s:: σ
 	Gs,  // S:: Σ
+
+	gd,  // d:: δ
 	Gd,  // D:: Δ
+
+	gf,  // f:: φ
 	Gf,  // F:: Φ
+
+	gg,  // g:: γ
 	Gg,  // G:: Γ
+
+	gh,  // h:: η
 	Gh,  // H:: Η
+
+	gj,  // j:: ϑ
 	Gj,  // J:: J
+
+	gk,  // k:: κ
 	Gk,  // K:: Κ
+
+	gl,  // l:: λ
 	Gl,  // L:: Λ
+
+	gz,  // z:: ζ
 	Gz,  // Z:: Ζ
+
+	gx,  // x:: ξ
 	Gx,  // X:: Ξ
+
+	gc,  // c:: χ
 	Gc,  // C:: Χ
+
+	gv,  // v:: ς
 	Gv,  // V:: V
+
+	gb,  // b:: β
 	Gb,  // B:: Β
+
+	gn,  // n:: ν
 	Gn,  // N:: Ν
+
+	gm,  // m:: μ
 	Gm,  // M:: Μ
 
   //BL
   bq,
-  bw,
-  be,
-  br,
-  bt,
-  by,
-  bu,
-  bi,
-  bo,
-  bp,
-  ba,
-  bs,
-  bd,
-  bf,
-  bg,
-  bh,
-  bj,
-  bk,
-  bl,
-  bz,
-  bx,
-  bc,
-  bv,
-  bb,
-  bn,
-  bm,
-
-  //BU
   bQ,
+
+  bw,
   bW,
+
+  be,
   bE,
+
+  br,
   bR,
+
+  bt,
   bT,
+
+  by,
   bY,
+
+  bu,
   bU,
+
+  bi,
   bI,
+
+  bo,
   bO,
+
+  bp,
   bP,
+
+  ba,
   bA,
+
+  bs,
   bS,
+
+  bd,
   bD,
+
+  bf,
   bF,
+
+  bg,
   bG,
+
+  bh,
   bH,
+
+  bj,
   bJ,
+
+  bk,
   bK,
+
+  bl,
   bL,
+
+  bz,
   bZ,
+
+  bx,
   bX,
+
+  bc,
   bC,
+
+  bv,
   bV,
+
+  bb,
   bB,
+
+  bn,
   bN,
+
+  bm,
   bM,
+
   
   //BN
   b0,
@@ -330,31 +390,82 @@ enum unicode_names {
 
   //FRAK
   frakq,
+  Frakq,
+
   frakw,
+  Frakw,
+
   frake,
+  Frake,
+  
   frakr,
+  Frakr,
+  
   frakt,
+  Frakt,
+  
   fraky,
+  Fraky,
+
   fraku,
+  Fraku,
+  
   fraki,
+  Fraki,
+
   frako,
+  Frako,
+
   frakp,
+  Frakp,
+
   fraka,
+  Fraka,
+
   fraks,
+  Fraks,
+
   frakd,
+  Frakd,
+
   frakf,
+  Frakf,
+
   frakg,
+  Frakg,
+
   frakh,
+  Frakh,
+
   frakj,
+  Frakj,
+
   frakk,
+  Frakk,
+
   frakl,
+  Frakl,
+
   frakz,
+  Frakz,
+
   frakx,
+  Frakx,
+
   frakc,
+  Frakc,
+
   frakv,
+  Frakv,
+  
   frakb,
+  Frakb,
+
   frakn,
+  Frakn,
+
   frakm,
+  Frakm,
 
 };
 
@@ -643,32 +754,59 @@ const uint32_t PROGMEM unicode_map[] = {
   [nuplus] = 0x2A04,
 
   //FRAK
-  [frakq] = 0x1D514,
-  [frakw] = 0x1D51A,
-  [frake] = 0x1D508,
-  [frakr] = 0x211C,
-  [frakt] = 0x1D517,
-  [fraky] = 0x1D51C,
-  [fraku] = 0x1D518,
-  [fraki] = 0x2111,
-  [frako] = 0x1D512,
-  [frakp] = 0x1D513,
-  [fraka] = 0x1D504,
-  [fraks] = 0x1D516,
-  [frakd] = 0x1D507,
-  [frakf] = 0x1D509,
-  [frakg] = 0x1D50A,
-  [frakh] = 0x210C,
-  [frakj] = 0x1D50D,
-  [frakk] = 0x1D50E,
-  [frakl] = 0x1D50F,
-  [frakz] = 0x2128,
-  [frakx] = 0x1D51B,
-  [frakc] = 0x212D,
-  [frakv] = 0x1D519,
-  [frakb] = 0x1D505,
-  [frakn] = 0x1D511,
-  [frakm] = 0x1D510,
+  [Frakq] = 0x1D514,
+  [Frakw] = 0x1D51A,
+  [Frake] = 0x1D508,
+  [Frakr] = 0x211C,
+  [Frakt] = 0x1D517,
+  [Fraky] = 0x1D51C,
+  [Fraku] = 0x1D518,
+  [Fraki] = 0x2111,
+  [Frako] = 0x1D512,
+  [Frakp] = 0x1D513,
+  [Fraka] = 0x1D504,
+  [Fraks] = 0x1D516,
+  [Frakd] = 0x1D507,
+  [Frakf] = 0x1D509,
+  [Frakg] = 0x1D50A,
+  [Frakh] = 0x210C,
+  [Frakj] = 0x1D50D,
+  [Frakk] = 0x1D50E,
+  [Frakl] = 0x1D50F,
+  [Frakz] = 0x2128,
+  [Frakx] = 0x1D51B,
+  [Frakc] = 0x212D,
+  [Frakv] = 0x1D519,
+  [Frakb] = 0x1D505,
+  [Frakn] = 0x1D511,
+  [Frakm] = 0x1D510,
+
+  [frakq] = 0x1D52E,
+  [frakw] = 0x1D534,
+  [frake] = 0x1D522,
+  [frakr] = 0x1D52F,
+  [frakt] = 0x1D531,
+  [fraky] = 0x1D536,
+  [fraku] = 0x1D532,
+  [fraki] = 0x1D526,
+  [frako] = 0x1D52C,
+  [frakp] = 0x1D52D,
+  [fraka] = 0x1D51E,
+  [fraks] = 0x1D530,
+  [frakd] = 0x1D521,
+  [frakf] = 0x1D523,
+  [frakg] = 0x1D524,
+  [frakh] = 0x1D525,
+  [frakj] = 0x1D527,
+  [frakk] = 0x1D528,
+  [frakl] = 0x1D529,
+  [frakz] = 0x1D537,
+  [frakx] = 0x1D535,
+  [frakc] = 0x1D520,
+  [frakv] = 0x1D533,
+  [frakb] = 0x1D51F,
+  [frakn] = 0x1D52B,
+  [frakm] = 0x1D52A,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -1005,18 +1143,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [FRAK] = LAYOUT_ergodox( 
         // left hand
         KC_TRNS,         KC_TRNS,       KC_TRNS,  KC_TRNS,     KC_TRNS,  KC_TRNS,    KC_TRNS,
-        KC_TRNS,         X(frakq),         X(frakw),    X(frake),       X(frakr),    X(frakt),      KC_TRNS,
-        KC_TRNS,         X(fraka),         X(fraks),    X(frakd),       X(frakf),    X(frakg),
-        KC_TRNS,         X(frakz),         X(frakx),    X(frakc),       X(frakv),    X(frakb),      KC_TRNS,
+        KC_TRNS,         XP(frakq,0),         XP(frakw,0),    XP(frake,0),       XP(frakr,0),    XP(frakt,0),      KC_TRNS,
+        KC_TRNS,         XP(fraka,0),         XP(fraks,0),    XP(frakd,0),       XP(frakf,0),    XP(frakg,0),
+        KC_TRNS,         XP(frakz,0),         XP(frakx,0),    XP(frakc,0),       XP(frakv,0),    XP(frakb,0),      KC_TRNS,
         KC_TRNS,         KC_TRNS,       KC_TRNS,  KC_TRNS,     KC_TRNS,
                                                KC_TRNS,        KC_TRNS,
                                                               KC_TRNS,
                                                KC_TRNS,KC_TRNS,KC_TRNS,
         // right hand
              KC_TRNS,     KC_TRNS,    KC_TRNS,  KC_TRNS,    KC_TRNS,    KC_TRNS,        KC_TRNS,
-             KC_TRNS,     X(fraky),      X(fraku),    X(fraki),      X(frako),       X(frakp),          KC_TRNS,
-                          X(frakh),      X(frakj),    X(frakk),      X(frakl),      KC_TRNS,          KC_TRNS,
-             KC_TRNS,     X(frakn),      X(frakm),    KC_TRNS,      KC_TRNS,      KC_TRNS,          KC_TRNS,
+             KC_TRNS,     XP(fraky,0),      XP(fraku,0),    XP(fraki,0),      XP(frako,0),       XP(frakp,0),          KC_TRNS,
+                          XP(frakh,0),      XP(frakj,0),    XP(frakk,0),      XP(frakl,0),      KC_TRNS,          KC_TRNS,
+             KC_TRNS,     XP(frakn,0),      XP(frakm,0),    KC_TRNS,      KC_TRNS,      KC_TRNS,          KC_TRNS,
                                   KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,          KC_TRNS,
              KC_TRNS,        KC_TRNS,
              KC_TRNS,
@@ -1288,6 +1426,21 @@ void matrix_scan_user(void) {
     }
 
 };
+
+uint16_t unicodemap_index(uint16_t keycode) {
+  if (keycode >= QK_UNICODEMAP_PAIR) {
+    // Keycode is a pair: extract index based on Shift / Caps Lock state
+    uint16_t index = keycode - QK_UNICODEMAP_PAIR;
+
+    bool shift = get_mods() & MOD_MASK_SHIFT, caps = IS_HOST_LED_ON(USB_LED_CAPS_LOCK);
+    if (shift ^ caps) { index += 1; }
+
+    return index & 0x7FFF;
+  } else {
+    // Keycode is a regular index
+    return keycode - QK_UNICODEMAP;
+  }
+}
 
 void keyboard_post_init_user(void) {
   // Customise these values to desired behaviour
