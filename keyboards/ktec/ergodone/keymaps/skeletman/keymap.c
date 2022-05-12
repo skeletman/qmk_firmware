@@ -344,6 +344,23 @@ enum unicode_names {
   supset,
   subseteq,
   supseteq,
+  emptyset,
+  powerset,
+  ell,
+  setminus,
+  complement,
+  aleph,
+  bet,
+  gimel,
+  dalet,
+  setintersect,
+  setunion,
+  nsetintersect,
+  nsetunion,
+  sqcap,
+  sqcup,
+  nsqcap,
+  nsqcup,
 
   //OP
   plusminus, //U+00B1
@@ -922,7 +939,7 @@ const uint32_t PROGMEM unicode_map[] = {
   [scptk] = 0x1D4C0,
   [Scptk] = 0x1D4A6,
 
-  [scptl] = 0x2113,
+  [scptl] = 0x1D4C1,
   [Scptl] = 0x2112,
 
   [scptm] = 0x1D4C2,
@@ -935,7 +952,7 @@ const uint32_t PROGMEM unicode_map[] = {
   [Scpto] = 0x1D4AA,
 
   [scptp] = 0x1D4C5,
-  [Scptp] = 0x2118,
+  [Scptp] = 0x1D4AB,
 
   [scptq] = 0x1D4C6,
   [Scptq] = 0x1D4AC,
@@ -966,6 +983,33 @@ const uint32_t PROGMEM unicode_map[] = {
 
   [scptz] = 0x1D4CF,
   [Scptz] = 0x1D4B5,
+
+    //SET
+  [in] = 0x2208,
+  [ni] = 0x220B,
+  [nin] = 0x2209,
+  [nni] = 0x220C,
+  [subset] = 0x2282,
+  [supset] = 0x2283,
+  [subseteq] = 0x2286,
+  [supseteq] = 0x2287,
+  [emptyset] = 0x2205,
+  [powerset] = 0x2118,
+  [ell] = 0x2113,
+  [setminus] = 0x2216,
+  [complement] = 0x2201,
+  [aleph] = 0x2135,
+  [bet] = 0x2136,
+  [gimel] = 0x2137,
+  [dalet] = 0x2138,
+  [setintersect] = 0x2229,
+  [setunion] = 0x222A,
+  [nsetintersect] = 0x22C2,
+  [nsetunion] = 0x22C3,
+  [sqcap] = 0x2293,
+  [sqcup] = 0x2294,
+  [nsqcap] = 0x2A05,
+  [nsqcup] = 0x2A06,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -1057,7 +1101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 2: Layer switch
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |        |  OP  |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |        |  OP  | SET  |      |      |      |      |           |      |      |      |      |      |      |        |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * |        | QWER |      |      | REL  |      | QWER |           | QWER |      |      |      |  OP  |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -1077,7 +1121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 // LAYER SWITCH
 [LAYR] = LAYOUT_ergodox(
-       UC_M_WC, TO(OP),   KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,
+       UC_M_WC, TO(OP),   TO(SET), KC_NO, KC_NO, KC_NO,   KC_NO,
        UC_M_WI, TO(BASE), KC_NO, KC_NO, TO(REL), KC_NO,   TO(BASE),
        UC_M_LN, TO(ARR),  TO(SCPT), KC_NO, TO(FRAK), TO(GRK),
        KC_NO,   KC_NO,    KC_NO, TO(CALC), KC_NO, TO(BBB),   KC_NO,
@@ -1096,7 +1140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_NO, KC_NO, KC_NO
 ),
 [LAYRONESHOT] = LAYOUT_ergodox(
-       UC_M_WC, OSL(OP),  KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,
+       UC_M_WC, OSL(OP),  OSL(SET), KC_NO, KC_NO, KC_NO,   KC_NO,
        UC_M_WI, TO(BASE), KC_NO, KC_NO, OSL(REL), KC_NO,   TO(BASE),
        UC_M_LN, OSL(ARR), OSL(SCPT), KC_NO, OSL(FRAK), OSL(GRK),
        KC_NO,   KC_NO,    KC_NO, OSL(CALC), KC_NO, OSL(BBB),   KC_NO,
@@ -1342,7 +1386,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [SCPT] = LAYOUT_ergodox( 
         // left hand
-        KC_TRNS,         KC_TRNS,       KC_TRNS,  KC_TRNS,     KC_TRNS,  KC_TRNS,    KC_TRNS,
+        KC_TRNS,         X(powerset),         X(ell),         KC_TRNS,     KC_TRNS,  KC_TRNS,    KC_TRNS,
         KC_TRNS,         XP(scptq,0),         XP(scptw,0),    XP(scpte,0),       XP(scptr,0),    XP(scptt,0),      KC_TRNS,
         KC_TRNS,         XP(scpta,0),         XP(scpts,0),    XP(scptd,0),       XP(scptf,0),    XP(scptg,0),
         KC_TRNS,         XP(scptz,0),         XP(scptx,0),    XP(scptc,0),       XP(scptv,0),    XP(scptb,0),      KC_TRNS,
@@ -1507,18 +1551,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [SET] = LAYOUT_ergodox( 
         // left hand
         KC_TRNS,         KC_TRNS,       KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,  KC_TRNS,
-        KC_TRNS,         KC_NO,         KC_NO,   KC_NO,    KC_NO,    KC_NO,     KC_TRNS,
-        KC_TRNS,         KC_NO,         KC_NO,   KC_NO,      KC_NO,    KC_NO,
+        KC_TRNS,         KC_NO,         X(ell),   X(emptyset),    X(powerset),    KC_NO,     KC_TRNS,
+        KC_TRNS,         X(aleph),      X(bet),   X(gimel),      X(dalet),    KC_NO,
         KC_TRNS,         KC_NO,         KC_NO,   KC_NO,      KC_NO,    KC_NO,     KC_TRNS,
         KC_TRNS,         KC_TRNS,       KC_TRNS, KC_TRNS,    KC_TRNS,
                                                KC_TRNS,        KC_TRNS,
                                                               KC_TRNS,
                                                KC_TRNS,KC_TRNS,KC_TRNS,
         // right hand
-             KC_TRNS,     KC_TRNS,    KC_TRNS,  KC_TRNS,    KC_TRNS,    KC_TRNS,        KC_TRNS,
-             KC_TRNS,     KC_NO,      KC_NO,    KC_NO,      KC_NO,       KC_NO,          KC_TRNS,
-                          KC_NO,      KC_NO,    KC_NO,      KC_NO,      KC_NO,          KC_TRNS,
-             KC_TRNS,     KC_NO,      KC_NO,    KC_NO,      KC_NO,      KC_NO,          KC_TRNS,
+             KC_TRNS,     KC_TRNS,    X(nsetintersect),  X(nsetunion),    X(nsqcap),    X(nsqcup),        KC_TRNS,
+             KC_TRNS,     X(setminus),      X(setintersect),    X(setunion),      X(sqcap),       X(sqcup),          KC_TRNS,
+                          X(complement),      X(in),    X(ni),      X(nin),      X(nni),          KC_TRNS,
+             KC_TRNS,     KC_NO,      X(subseteq),    X(supseteq),      X(subset),      X(supset),          KC_TRNS,
                                   KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,          KC_TRNS,
              KC_TRNS,        KC_TRNS,
              KC_TRNS,
